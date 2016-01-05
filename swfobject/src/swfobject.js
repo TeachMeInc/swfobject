@@ -1,4 +1,4 @@
-/*!    SWFObject v2.3.20130521 <http://github.com/swfobject/swfobject>
+/*!    SWFObject v2.3.20160105 <http://github.com/rhysgjones/swfobject>
     is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 */
 
@@ -692,6 +692,12 @@ var swfobject = function () {
                             par[j] = parObj[j];
                         }
                     }
+
+                    // Add wmode=direct as object tag attribute if it's set. Fixes bug in IE11
+                    if (typeof par.wmode === "string" && par.wmode.toLowerCase() === "direct") {
+                        att.wmode = "direct";
+                    }
+
                     if (flashvarsObj && typeof flashvarsObj === OBJECT) {
                         for (var k in flashvarsObj) { // copy object to avoid the use of references, because web authors often reuse flashvarsObj for multiple SWFs
                             if (flashvarsObj.hasOwnProperty(k)) {
